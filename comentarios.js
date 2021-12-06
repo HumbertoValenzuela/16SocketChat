@@ -1,6 +1,8 @@
 // 197 Introduccion a la seccion
 // 
 
+const { Socket } = require("socket.io");
+
 // Comunicación entre usuarios
 // Comunicación entre 1 a muchos
 // Comunicación 1 a 1
@@ -132,3 +134,95 @@
 
 // 207 Respaldo a GitHub de nuestra aplicacion de Chat
 // GitHub - Crear un repositorio
+// 16SocketChat
+
+// 208 Diseno de nuestra sala de chat
+// Copiar y pegar archivos a public
+
+// 209 Renderizar usuarios
+// renderizarUsuarios usar en socket-chat.js
+// socket.on('connect'
+// socket.emit('entrarChat',  renderizarUsuarios( resp );
+// Navegador - dos ventanas - notar que el segundo usuario conectado obtiene los anteriores. Pero los antiguos usuarios en la sala, no actualiza para obtener los nuevos conectados.
+// socket-chat.js: listaPersona, se dispara cuando hay cambios en las personas. Cuando entra, sale.
+// socket.on('listaPersona', function( personas) {
+//   // console.log( personas );
+//   renderizarUsuarios( personas );
+// });
+
+
+// 210 Obtener el ID del usuario conectado
+// Al hacer clic en el nombre de usuario, se debe enviar el id del usuario a la consola
+// Listeners
+// socket-chat-jquery.js:
+// divUsuarios.on('click', 'a', function() {
+//   var id = $(this).data('id');
+//   if (id) {
+//       console.log(id);
+//   }
+// });
+
+// 211 Enviar y renderizar mensajes
+// Enviar mensajes usando el DOM
+// chat.html: <form id="formEnviar">
+//* <div class="row">
+{/* <div class="col-8">
+    <input autocomplete="off" id="txtMensaje" placeholder="Escribe tu mensaje aquí" class="form-control b-0" autofocus>
+</div>
+<div class="col-4 text-right">
+    <button type="submit" class="btn btn-info btn-circle btn-lg"><i class="fa fa-paper-plane-o"></i> </button>
+</div>
+</div>
+</form>  */}
+// socket-chat-jquery.js:
+// var formEnviar = $('#formEnviar');
+// var txtMensaje = $('#txtMensaje');
+// Obtener info de la caja de texto
+// usarlo en la función formEnviar.on('submit
+// Al Enviar mensaje - borrar el texto
+// Obtener de params nombre. mensaje obtener de txtMensaje.val()
+// Se observa que puedes ver los mensajes enviados por la consola
+// Cuando aplicación carga foco en el Input y auto-completa off
+//{/* <input autocomplete="off" id="txtMensaje" placeholder="Escribe tu mensaje aquí" class="form-control b-0" autofocus> */}
+// Cuando se envie el mensaje, el server notificar para borrar la casilla de texto
+// Socket.js: crearMensaje callback(mensaje); para regresar el mensaje
+// Renderizar en la pantalla de chat
+// socket-chat-jquery.js: referencia divChatbox
+// function renderizarMensajes. mensaje tiene fecha mensaje nombre
+// Mensaje en azul es de otros.
+// Mensaje en gris es mio. 
+// formEnviar.on('submit' llamar la funcion renderizarMensajes
+// Usar renderizarMensajes cuando se recibe un mensaje
+// socket-chat.js:
+// socket.on('crearMensaje', function(mensaje) {
+// console.log('Servidor:', mensaje);
+// renderizarMensajes(mensaje, false);
+
+// 212 Mejorar la forma de renderizar mensajes
+// Renderizacion entre ambos mensajes
+// socket-chat-jquery.js:renderizarMensajes: si (yo) lo envia evaluar la condicion
+// obtener hora var hora = fecha.getHours() + ':' + fecha.getMinutes();
+// Si soy yo entonces colocar mensaje del lado derecho y si no, el lado izquierdo.
+// formEnviar.on('submit
+//  renderizarMensajes(mensaje, true); la bandera
+// socket-chat.js: socket.on('crearMensaje', function(mensaje) {
+    // console.log('Servidor:', mensaje);
+    // renderizarMensajes(mensaje, false);
+  // }); notar la bandera
+  // socket-chat-jquery.js: cuando es administrador cambiar el color a rojo
+  // function renderizarMensajes(mensaje, yo) {
+    // if (mensaje.nombre === 'Administrador') { adminClass = 'danger';
+    // if (mensaje.nombre !== 'Administrador') {
+// Cuando un usuario entra al chat, enviar mensaje usuario entro
+// socket.js: entrarChat client.broadcast.to(data.sala).emit('crearMensaje', crearMensaje('Administrador', `${data.nombre} se unió` ) );
+// scrollBottom: Cada vez que alguien escribe se va el scroll al final
+// socket-chat-jquery.js: formEnviar  scrollBottom();
+// socket-chat.js: socket.on('crearMensaje', function(mensaje) {  scrollBottom();
+
+// 213 Propuestas para ejercicios del chat
+// Buscar Contactos.
+// Cambiar el titulo de sala de chat.
+// Cambiar la imagen de perfil.
+// clic en un usuario y abrir otra ventana de chat.
+
+// 214 Subir cambios a GitHub – SocketChat

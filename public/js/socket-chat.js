@@ -21,7 +21,8 @@ socket.on('connect', function() {
     // socket.emit('entrarChat', { usuario: 'Usuario1'  });
     // Si el server acepta entonces agregar un callback para enviar la respuesta del servidor
     socket.emit('entrarChat', usuario, function(resp){
-        console.log('usuarios conectados', resp);
+        // console.log('usuarios conectados', resp);
+        renderizarUsuarios( resp );
     } );
 });
 
@@ -43,13 +44,15 @@ socket.on('disconnect', function() {
 
 // Escuchar información de servidor: abandono el chat
 socket.on('crearMensaje', function(mensaje) {
-    console.log('Servidor:', mensaje);
+    // console.log('Servidor:', mensaje);
+    renderizarMensajes(mensaje, false);
 });
 
 // Escucha cambios de usuarios
 // Cuando un usuario entra o sale del chat
 socket.on('listaPersona', function( personas) {
-    console.log( personas );
+    // console.log( personas );
+    renderizarUsuarios( personas );
 });
 
 // Mensajes privados
